@@ -1,0 +1,21 @@
+[main] doubleLLTestRunner 1000 (0) exception: trapped!
+[main] doubleLLTestRunner 1000 (0) exception: code 0xC0000005 at 0x40155C
+[main] doubleLLTestRunner 1000 (0) exception: ax 0x0 bx 0x244FDB0 cx 0x61061104 dx 0xA031910
+[main] doubleLLTestRunner 1000 (0) exception: si 0x0 di 0x0 bp 0x244FD6C sp 0x244FD4C
+[main] doubleLLTestRunner 1000 (0) exception: exception is: STATUS_ACCESS_VIOLATION
+[main] doubleLLTestRunner 1000 (0) stack: Stack trace:
+[main] doubleLLTestRunner 1000 (0) stack: frame 0: sp = 0x244F8EC, pc = 0x6100A2C3
+[main] doubleLLTestRunner 1000 (0) stack: frame 1: sp = 0x244F928, pc = 0x77ACB459
+[main] doubleLLTestRunner 1000 (0) stack: frame 2: sp = 0x244F94C, pc = 0x77ACB42B
+[main] doubleLLTestRunner 1000 (0) stack: frame 3: sp = 0x244F9FC, pc = 0x77A80133
+[main] doubleLLTestRunner 1000 (0) stack: frame 4: sp = 0x244FD6C, pc = 0x401362
+[main] doubleLLTestRunner 1000 (0) stack: frame 5: sp = 0x244FD90, pc = 0x40125A
+[main] doubleLLTestRunner 1000 (0) stack: frame 6: sp = 0x244FD98, pc = 0x61004402
+[main] doubleLLTestRunner 1000 (0) stack: frame 7: sp = 0x244FF50, pc = 0x61004420
+[main] doubleLLTestRunner 1000 (0) stack: frame 8: sp = 0x244FF5C, pc = 0x401706
+[main] doubleLLTestRunner 1000 (0) stack: frame 9: sp = 0x244FF6C, pc = 0x40103A
+[main] doubleLLTestRunner 1000 (0) stack: frame 10: sp = 0x244FF88, pc = 0x76DA33AA
+[main] doubleLLTestRunner 1000 (0) stack: frame 11: sp = 0x244FF94, pc = 0x77AA9EF2
+[main] doubleLLTestRunner 1000 (0) stack: frame 12: sp = 0x244FFD4, pc = 0x77AA9EC5
+[main] doubleLLTestRunner 1000 (0) stack: frame 13: sp = 0x244FFEC, pc = 0x0
+[main] doubleLLTestRunner 1000 (0) stack: End of stack trace
