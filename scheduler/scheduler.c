@@ -28,3 +28,20 @@ int insert(schedulerQueue *sq, Process *process){
 	}
 	return 1;
 }
+
+int process(schedulerQueue* sQ){
+	int count=0;
+	Process* temp = sQ->head;
+	while(count == 0 || sQ->length > 0){
+		if(temp->next == sQ->head)
+			count=1;
+		if(temp->duration <= 0){
+			temp=temp->next;
+			sQ->length--;
+			sQ->rear--;
+		}
+		temp->duration -= 5;
+		temp = temp->next;
+	}
+	return 1;
+}

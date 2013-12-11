@@ -49,4 +49,5 @@ void test_to_insert_three_processes_in_the_scheduler(){
 	ASSERT(sq->head->next->next = &p3);
 	ASSERT(sq->length==3);
 	ASSERT(sq->rear==2);
+	process(sq);
 }

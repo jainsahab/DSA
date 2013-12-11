@@ -8,10 +8,10 @@ typedef struct p{
 
 typedef struct {
 	Process *head;
-	void *End;
 	int length;
 	int rear;
 } schedulerQueue;
 
 schedulerQueue* create();
 int insert(schedulerQueue*, Process*);
+int process(schedulerQueue*);
