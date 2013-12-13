@@ -52,3 +52,24 @@ int insert(List *start, int index, void *data){
 	}
 	return 1;	
 }
+
+void remove(List *start, int index){
+	Node *temp,*temp2;
+	int count = 1;
+	if(index == 0){
+		start->head = start->head->next;
+		start->length--;
+		return;
+	}
+	temp = start->head;
+	while(count < index){
+		temp = temp->next;
+		count++;
+	}
+	temp2=temp->next;
+	temp->next = temp->next->next;
+	if(temp->next != NULL)
+		temp->next->previous = temp;
+	free(temp2);
+	start->length--;
+}

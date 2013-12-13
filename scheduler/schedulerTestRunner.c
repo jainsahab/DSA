@@ -54,11 +54,6 @@ int main(){
 		test_to_create_process_head();
 	tearDown();
 	testEnded();
-	testStarted("test_to_insert_process_in_the_scheduler");
-	setup();
-		test_to_insert_process_in_the_scheduler();
-	tearDown();
-	testEnded();
 	testStarted("test_to_insert_two_processes_in_the_scheduler");
 	setup();
 		test_to_insert_two_processes_in_the_scheduler();

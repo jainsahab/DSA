@@ -69,6 +69,21 @@ int main(){
 		test_to_insert_element_in_between();
 	tearDown();
 	testEnded();
+	testStarted("test_to_delete_an_element_from_beginning");
+	setup();
+		test_to_delete_an_element_from_beginning();
+	tearDown();
+	testEnded();
+	testStarted("test_to_delete_an_element_in_between");
+	setup();
+		test_to_delete_an_element_in_between();
+	tearDown();
+	testEnded();
+	testStarted("test_to_delete_an_element_from_last");
+	setup();
+		test_to_delete_an_element_from_last();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
@@ -76,8 +91,6 @@ int main(){
 }
 
 void setup(){}
-
-void tearDown(){}
 
 void fixtureSetup(){}
 

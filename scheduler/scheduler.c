@@ -16,12 +16,20 @@ int insert(schedulerQueue *sq, Process *process){
 		return 1;
 	}
 	if(sq->length > 0 && sq->rear > -1){
+		void* next	;
+		int count=0;
 		Process* temp = sq->head;
-		while(temp->next != sq->head){
+		while(process->priority > temp->priority ){
+			++count;
 			temp = temp->next;
 		}
+		// next = temp;
+		// temp = process;
+		// process->next = next;
+		process->next = temp->next;
 		temp->next = process;
-		process->next = sq->head;
+		if(count==0)
+			sq->head = process;
 		sq->rear++;
 		sq->length++;
 		return 1;
