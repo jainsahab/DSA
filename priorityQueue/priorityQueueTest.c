@@ -2,132 +2,133 @@
 #include "priorityQueue.h"
 #include <stdlib.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
+Head* start;
+Node* elements0;
+Node* elements1;
+Node* elements2;
+Node* elements3;
 
+
+
+void setup(){
+	start = create();
+	elements0 = malloc(sizeof(Node)*1);
+	elements1 = malloc(sizeof(Node)*1);
+	elements2 = malloc(sizeof(Node)*1);
+	elements3 = malloc(sizeof(Node)*1);
+
+}
+
+void tearDown(){
+	dispose(start);
+}
+
+void assertIt(int* expected,int length ,Head* start){
+	int count=0;
+	Node* node = start->head;
+	ASSERT(length == start->length);
+	while(node != NULL){
+		ASSERT(expected[count] == *(int*)(node->data));
+		node = node->next;
+		count++;
+	}
+}
 
 void test_to_create_queue(){
-	Head* start;
-	start = create();
 	ASSERT(0==start->length);
 	ASSERT(NULL==start->head);
 }
 
 void test_to_enqueue_an_element(){
-	Head* start;
+	int expected[]={1};
 	int* arr = malloc(3*sizeof(int));
-	Node element = {arr,1,NULL};
+	Node* element = calloc(1, sizeof(Node));
+	element[0].data = arr; element[0].priority = 1; element[0].next=NULL;
 	arr[0]=1;
-	start = create();
-	enqueue(start, &element);
-	ASSERT(1==start->length);
-	ASSERT(1==*(int*)(start->head->data));
+	enqueue(start, element);
+	assertIt(expected, 1, start);
 }
 
 void test_to_enqueue_two_elements(){
-	Head* start;
-	int* arr = malloc(3*sizeof(int));
-	Node element = {arr,2,NULL};
-	Node element2 = {arr+1,1,NULL};
+	int* arr = calloc(3,sizeof(int));
+	int expected[] = {2,1};
+	elements0[0].data = arr; elements0[0].priority = 2; elements0[0].next=NULL;
+	elements1[0].data = arr+1; elements1[0].priority = 1; elements1[0].next=NULL;
 	arr[0]=1;
 	arr[1]=2;
-	start = create();
-	enqueue(start, &element);
-	enqueue(start, &element2);
-	ASSERT(2==start->length);
-	ASSERT(2==*(int*)(start->head->data));
-	ASSERT(1==*(int*)(start->head->next->data));
+	enqueue(start, elements0);
+	enqueue(start, elements1);
+	assertIt(expected,2, start);
 }
 
 
 
 void test_to_enqueue_three_elements_with_complex_priority(){
-	Head* start;
 	int* arr = malloc(3*sizeof(int));
-	Node* elements = malloc(sizeof(Node)*3);
-	elements[0].data = arr;elements[0].priority = 5;elements[0].next = NULL;
-	elements[1].data = arr+1;elements[1].priority = 2;elements[1].next = NULL;
-	elements[2].data = arr+2;elements[2].priority = 3;elements[2].next = NULL;
+	int expected[]={2,3,1};
+	elements0[0].data = arr;elements0[0].priority = 5;elements0[0].next = NULL;
+	elements1[0].data = arr+1;elements1[0].priority = 2;elements1[0].next = NULL;
+	elements2[0].data = arr+2;elements2[0].priority = 3;elements2[0].next = NULL;
 	arr[0]=1;
 	arr[1]=2;
 	arr[2]=3;
-	start = create();
-	enqueue(start, &elements[0]);
-	enqueue(start, &elements[1]);
-	enqueue(start, &elements[2]);
-	ASSERT(3==start->length);
-	ASSERT(2==*(int*)(start->head->data));
-	ASSERT(3==*(int*)(start->head->next->data));
-	ASSERT(1==*(int*)(start->head->next->next->data));
+	enqueue(start, elements0);
+	enqueue(start, elements1);
+	enqueue(start, elements2);
+	assertIt(expected,3,start);
 }
 
 
 void test_to_dequeue_an_element(){
-	Head* start;
 	int* arr = malloc(3*sizeof(int));
+	int expected[]={1};
 	Node element = {arr,1,NULL};
 	arr[0]=1;
-	start = create();
 	enqueue(start, &element);
-	ASSERT(1==start->length);
-	ASSERT(1==*(int*)(start->head->data));
+	assertIt(expected, 1, start);
 	dequeue(start);
-	ASSERT(NULL == start->head);
-	ASSERT(0==start->length);
+	assertIt(NULL, 0, start);
 }
 
 
 void test_to_dequeue_one_element_from_two_elements(){
-	Head* start;
 	int* arr = malloc(3*sizeof(int));
-	Node element = {arr,2,NULL};
-	Node element2 = {arr+1,1,NULL};
+	int beforeDequeue[]={2,1};
+	int afterDequeue[]={1};
+	elements0[0].data = arr; elements0[0].priority = 2; elements0[0].next=NULL;
+	elements1[0].data = arr+1; elements1[0].priority = 1; elements1[0].next=NULL;
 	arr[0]=1;
 	arr[1]=2;
-	start = create();
-	enqueue(start, &element);
-	enqueue(start, &element2);
-	ASSERT(2==start->length);
-	ASSERT(2==*(int*)(start->head->data));
-	ASSERT(1==*(int*)(start->head->next->data));
+	enqueue(start, elements0);
+	enqueue(start, elements1);
+	assertIt(beforeDequeue, 2, start);
 	dequeue(start);
-	ASSERT(start->length==1);
-	ASSERT(1==*(int*)(start->head->data));
+	assertIt(afterDequeue, 1, start);	
 }
 void test_to_enqueue_two_elements_at_end(){
-	Head* start;
 	int* arr = malloc(3*sizeof(int));
-	Node element = {arr,1,NULL};
-	Node element2 = {arr+1,2,NULL};
+	int expected[]={1,2};
+	elements0[0].data = arr; elements0[0].priority = 1; elements0[0].next=NULL;
+	elements1[0].data = arr+1; elements1[0].priority = 2; elements1[0].next=NULL;
 	arr[0]=1;
 	arr[1]=2;
-	start = create();
-	enqueue(start, &element);
-	enqueue(start, &element2);
-	ASSERT(2==start->length);
-	ASSERT(1==*(int*)(start->head->data));
-	ASSERT(2==*(int*)(start->head->next->data));
+	enqueue(start, elements0);
+	enqueue(start, elements1);
+	assertIt(expected, 2, start);
 }
 
 
-void test_to_enqueue_many_elements_on_manish_wish(){
-	Head* start;
+void test_to_enqueue_elements_in_between_of_queue(){
 	int* arr = malloc(5*sizeof(int));
-	Node* elements = malloc(sizeof(Node)*4);
-	elements[0].data = arr;elements[0].priority = 5;elements[0].next = NULL;
-	elements[1].data = arr+1;elements[1].priority = 1;elements[1].next = NULL;
-	elements[2].data = arr+2;elements[2].priority = 3;elements[2].next = NULL;
-	elements[3].data = arr+3;elements[3].priority = 2;elements[3].next = NULL;
-	arr[0]=1;
-	arr[1]=2;
-	arr[2]=3;
-	arr[3]=4;
-	arr[4]=5;
-	start = create();
-	enqueue(start, &elements[0]);
-	enqueue(start, &elements[1]);
-	enqueue(start, &elements[2]);
-	enqueue(start, &elements[3]);
-	ASSERT(2==*(int*)(start->head->data));
-	ASSERT(4==*(int*)(start->head->next->data));
-	ASSERT(3==*(int*)(start->head->next->next->data));
-	ASSERT(1==*(int*)(start->head->next->next->next->data));
+	int expected[]={2,4,3,1};
+	elements0[0].data = arr;elements0[0].priority = 5;elements0[0].next = NULL;
+	elements1[0].data = arr+1;elements1[0].priority = 1;elements1[0].next = NULL;
+	elements2[0].data = arr+2;elements2[0].priority = 3;elements2[0].next = NULL;
+	elements3[0].data = arr+3;elements3[0].priority = 2;elements3[0].next = NULL;
+	arr[0]=1; arr[1]=2; arr[2]=3;arr[3]=4;arr[4]=5;
+	enqueue(start, elements0);
+	enqueue(start, elements1);
+	enqueue(start, elements2);
+	enqueue(start, elements3);
+	assertIt(expected, 4, start);
 }

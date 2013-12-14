@@ -44,3 +44,17 @@ void dequeue(Head* start){
 	start->length--;
 	return;
 }
+
+void dispose(Head* start){
+	Node* temp = start->head;
+	Node* t1 = temp ;
+	int count = 0;
+	while(t1 != NULL){
+		if(count != 0)
+			temp = t1;
+		t1 = temp->next;
+		if (temp != NULL)
+			free(temp);
+		count++;
+	}
+}

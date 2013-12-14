@@ -84,9 +84,9 @@ int main(){
 		test_to_enqueue_two_elements_at_end();
 	tearDown();
 	testEnded();
-	testStarted("test_to_enqueue_many_elements_on_manish_wish");
+	testStarted("test_to_enqueue_elements_in_between_of_queue");
 	setup();
-		test_to_enqueue_many_elements_on_manish_wish();
+		test_to_enqueue_elements_in_between_of_queue();
 	tearDown();
 	testEnded();
 
@@ -94,10 +94,6 @@ int main(){
 	fixtureTearDown();
 	return 0;
 }
-
-void setup(){}
-
-void tearDown(){}
 
 void fixtureSetup(){}
 
