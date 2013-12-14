@@ -79,6 +79,16 @@ int main(){
 		test_to_dequeue_one_element_from_two_elements();
 	tearDown();
 	testEnded();
+	testStarted("test_to_enqueue_two_elements_at_end");
+	setup();
+		test_to_enqueue_two_elements_at_end();
+	tearDown();
+	testEnded();
+	testStarted("test_to_enqueue_many_elements_on_manish_wish");
+	setup();
+		test_to_enqueue_many_elements_on_manish_wish();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
