@@ -5,6 +5,7 @@
 List* create(){
 	List* start = calloc(1,sizeof(List));
 	start->length=0;
+	start->head=NULL;
 	return start;
 }
 

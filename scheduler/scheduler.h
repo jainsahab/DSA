@@ -1,17 +1,10 @@
-typedef char String[260];
-typedef struct p{
+#include "priorityQueue.h"
+typedef Head Scheduler;
+typedef char String [256];
+typedef struct {
 	String processName;
 	int duration;
-	int priority;
-	struct p *next;
-} Process;
+} processInfo;
 
-typedef struct {
-	Process *head;
-	int length;
-	int rear;
-} schedulerQueue;
-
-schedulerQueue* create();
-int insert(schedulerQueue*, Process*);
-int process(schedulerQueue*);
+int insert(Scheduler* scheduler,processInfo* process,int priority);
+void executeProcess(Scheduler* scheduler);

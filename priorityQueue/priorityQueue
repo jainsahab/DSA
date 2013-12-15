@@ -49,32 +49,8 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_to_create_head_for_process_queue");
-	setup();
-		test_to_create_head_for_process_queue();
-	tearDown();
-	testEnded();
-	testStarted("test_to_insert_a_process_in_scheduler");
-	setup();
-		test_to_insert_a_process_in_scheduler();
-	tearDown();
-	testEnded();
-	testStarted("test_to_insert_process_of_higher_priority_than_previous_one");
-	setup();
-		test_to_insert_process_of_higher_priority_than_previous_one();
-	tearDown();
-	testEnded();
-	testStarted("test_to_insert_process_with_worst_case");
-	setup();
-		test_to_insert_process_with_worst_case();
-	tearDown();
-	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
 	return 0;
 }
-
-void fixtureSetup(){}
-
-void fixtureTearDown(){}
