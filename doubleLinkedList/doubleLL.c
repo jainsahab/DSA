@@ -17,36 +17,29 @@ Node* createNode(void* prevAddress,void* nextAddress){
 }
 
 int insert(List *start, int index, void *data){
-	Node *temp,*head;
-	Node *prev,*next;
+	Node *head=NULL,*prev=NULL,*next=NULL;
 	int i;
 	head = start->head;
-	for (i = 0; i < index ; ++i){
-        if(head->next != NULL)
-            head = head->next;
+    while(head!= NULL){
+        prev = head;
+        head = head->next;
     }
+    head = prev;
 	if(start->length==0){
-		temp = createNode(NULL, NULL);
-		start->head=temp;
-		temp->data=data;
+		start->head = createNode(prev, next);;
+		start->head->data=data;
 		start->length++;	
 		return 1;
 	}
 	if(start->length == index){
-		temp = createNode(head, NULL);
-        head->next = temp;
-        head->data = data;
+        head->next = createNode(prev, next);
+        head->next->data = data;
         start->length++;
         return 1;
 	}
 	if(index >= 0 && index < start->length){
-		prev = head;
-		for(i=0;i<index-1;i++){
-			prev = prev->next;
-		}
 		next = prev->next;
-		temp = createNode(prev, next);
-		head->next = temp;
+		head->next = createNode(prev, next);
 		head->data = data;
 		start->length ++;
 		return 1;
@@ -54,13 +47,15 @@ int insert(List *start, int index, void *data){
 	return 1;	
 }
 
-void remove(List *start, int index){
+int remove(List *start, int index){
 	Node *temp,*temp2;
 	int count = 1;
+	if(index >= start->length)
+		return 0;
 	if(index == 0){
 		start->head = start->head->next;
 		start->length--;
-		return;
+		return 1;
 	}
 	temp = start->head;
 	while(count < index){
@@ -73,4 +68,25 @@ void remove(List *start, int index){
 		temp->next->previous = temp;
 	free(temp2);
 	start->length--;
+	return 1;
+}
+
+void dispose(List* start){
+	Node* temp = start->head;
+	Node* t1 = temp ;
+	int count = 0;
+	while(t1 != NULL){
+		if(count != 0)
+			temp = t1;
+		t1 = temp->next;
+		if (temp != NULL)
+			free(temp);
+		count++;
+	}
+}
+
+int isEmpty(List* start){
+	if(start->head == NULL)
+		return 1;
+	return 0;
 }
