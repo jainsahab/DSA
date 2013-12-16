@@ -1,6 +1,6 @@
 #include "stack.h"
 
-int push(Stack* start, int* data){
+int push(Stack* start, void* data){
 	insert(start, start->length, data);
 	return 1;
 }
