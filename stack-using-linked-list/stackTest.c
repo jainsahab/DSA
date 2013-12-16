@@ -45,3 +45,14 @@ void test_2_to_pop_element_into_stack(){
 void test_3_to_know_whether_the_stack_is_Empty(){
 	ASSERT(isEmpty(start));
 }
+
+
+void test_4_to_get_the_top_element_of_stack(){
+	int arr[] = {1,2,3,4};
+	push(start, &arr);
+	ASSERT(1 == *(int*)(top(start)));
+	push(start, &arr[1]);
+	ASSERT(2 == *(int*)(top(start)));
+	push(start, &arr[2]);
+	ASSERT(3 == *(int*)(top(start)));
+}

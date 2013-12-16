@@ -69,6 +69,11 @@ int main(){
 		test_3_to_know_whether_the_stack_is_Empty();
 	tearDown();
 	testEnded();
+	testStarted("test_4_to_get_the_top_element_of_stack");
+	setup();
+		test_4_to_get_the_top_element_of_stack();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
