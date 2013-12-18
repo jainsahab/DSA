@@ -5,8 +5,7 @@ Head* create(){
 	st = calloc(1,sizeof(Head));
 	st->length = 0;
 	st->head=NULL;
-	return st;
-}
+	return st;}
 
 int enqueue(Head* start, Node* element){
 	Node* temp = start->head;

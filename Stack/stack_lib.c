@@ -1,42 +1,58 @@
 #include "stack_lib.h"
 #include <stdlib.h>
 #include <string.h>
-Stack* create(int ElementSize, int Size){
-	Stack* stack;
-	stack=malloc(sizeof(Stack)*1);
-	stack->stackinfo.elementSize=ElementSize;
-	stack->stackinfo.size=Size;
-	stack->stackinfo.top=-1;
-	stack->elements=calloc(stack->stackinfo.size,stack->stackinfo.elementSize);
+
+typedef struct 
+{
+	void** elements;
+	int top;
+	int length; 	
+}Stack;
+
+Stack* stack;
+void* create(int length){
+	stack=calloc(1,sizeof(Stack));
+	stack->length=length;
+	stack->top=-1;
+	stack->elements=calloc(stack->length,sizeof(void*));
 	return stack;
 }
 
+void dispose(){
+	free(stack);
+}
+
 boolean IsStackFull(Stack *st){
-	if((st->stackinfo.top+1) >= st->stackinfo.size)
+	if((st->top+1) >= st->length)
 		return true;
 	else
 		return false;
 }
 
-boolean push(Stack* stack,void* elementToPush){
+boolean push(void* st,void* elementToPush){
+	Stack* stack = (Stack*)st;
 	void* address;
-	if(IsStackFull(stack))
-		return false;
-	address=stack->elements+(++(stack->stackinfo.top)*stack->stackinfo.elementSize);
-	memcpy(address, elementToPush, stack->stackinfo.elementSize);
+	if(IsStackFull(stack)){
+		stack->length *= 2;
+		stack->elements = realloc(stack->elements, stack->length*sizeof(void*));		
+	}
+	stack->elements[++stack->top] = elementToPush;
 	return true;
 }
 
 boolean IsEmpty(Stack* stack){
-        return stack->stackinfo.top==-1;
+        return stack->top==-1;
 }
 
-void* pop(Stack* stack){
+void* pop(void* st){
+	Stack* stack = (Stack*)st;
 	if(IsEmpty(stack))
 		return false;
-	return stack->elements+((stack->stackinfo.top--)*stack->stackinfo.elementSize);
+	stack->top--;
+	return stack->elements[stack->top + 1];
 }
 
-void* top(Stack* stack){
-	return stack->elements+(stack->stackinfo.top*stack->stackinfo.elementSize);
+void* top(void* st){
+	Stack* stack = (Stack*)st;
+	return stack->elements[stack->top];
 }
