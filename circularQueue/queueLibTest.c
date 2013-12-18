@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <stdio.h>
+#include "custom_header.js"
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 Queue* queue;

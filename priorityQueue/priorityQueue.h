@@ -11,5 +11,5 @@ typedef struct {
 
 Head* create();
 int enqueue(Head*, Node*);
-void dequeue(Head*);
+void* dequeue(Head*);
 void dispose(Head*);

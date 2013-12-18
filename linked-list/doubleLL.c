@@ -47,15 +47,16 @@ int insert(List *start, int index, void *data){
 	return 1;	
 }
 
-int remove(List *start, int index){
+void* remove(List *start, int index){
 	Node *temp,*temp2;
 	int count = 1;
 	if(index >= start->length)
-		return 0;
+		return NULL;
 	if(index == 0){
+		temp = start->head->data;
 		start->head = start->head->next;
 		start->length--;
-		return 1;
+		return temp;
 	}
 	temp = start->head;
 	while(count < index){
@@ -66,9 +67,8 @@ int remove(List *start, int index){
 	temp->next = temp->next->next;
 	if(temp->next != NULL)
 		temp->next->previous = temp;
-	free(temp2);
 	start->length--;
-	return 1;
+	return temp2->data;
 }
 
 void dispose(List* start){

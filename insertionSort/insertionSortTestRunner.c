@@ -89,6 +89,11 @@ int main(){
 		test_should_arrange_string_data_in_order();
 	tearDown();
 	testEnded();
+	testStarted("test_2");
+	setup();
+		test_2();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

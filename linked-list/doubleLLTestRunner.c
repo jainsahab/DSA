@@ -84,9 +84,9 @@ int main(){
 		test_7_to_delete_an_element_from_last();
 	tearDown();
 	testEnded();
-	testStarted("test_8_to_delete_an_element_of_more_index");
+	testStarted("test_8_to_delete_an_element_which_is_no_longer_exist");
 	setup();
-		test_8_to_delete_an_element_of_more_index();
+		test_8_to_delete_an_element_which_is_no_longer_exist();
 	tearDown();
 	testEnded();
 	testStarted("test_9_to_know_whether_the_list_is_empty_or_not");

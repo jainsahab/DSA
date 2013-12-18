@@ -19,7 +19,7 @@ void isort(void* base, size_t numberOfElements, size_t elementSize,compare comp)
     		memcpy(elementToCompare + elementSize, 
     					elementToCompare, elementSize);    		    							
     	} 
-    	memcpy(base + (j + 1) * elementSize, temp, elementSize);    			    					    	
+    	memcpy(base + (j + 1) * elementSize, temp, elementSize);
     }
     free(temp);
 }

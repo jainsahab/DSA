@@ -11,6 +11,6 @@ typedef struct {
 
 List* create();
 int insert(List* start, int index, void* data);
-int remove(List* start, int index);
+void* remove(List* start, int index);
 void dispose(List* start);
 int isEmpty(List* start);

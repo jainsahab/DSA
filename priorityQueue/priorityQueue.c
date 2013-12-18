@@ -12,7 +12,6 @@ int enqueue(Head* start, Node* element){
 	Node* temp = start->head;
 	Node* temp2;
 	int count=0;
-			// printf("%d\n", element->priority);
 	if(temp == NULL){
 		start->head = element;
 		start->length++;
@@ -38,11 +37,11 @@ int enqueue(Head* start, Node* element){
 	return 1;
 }
 
-void dequeue(Head* start){
+void* dequeue(Head* start){
 	Node* temp = start->head;
 	start->head = temp->next;
 	start->length--;
-	return;
+	return temp;
 }
 
 void dispose(Head* start){

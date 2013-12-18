@@ -2,6 +2,7 @@
 #include "bSearchLib.h"
 #include <stdlib.h>
 #include <string.h>
+#include "custom_header.js"
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 

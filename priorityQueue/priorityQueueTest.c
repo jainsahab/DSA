@@ -45,7 +45,7 @@ void test_to_enqueue_an_element(){
 	Node* element = calloc(1, sizeof(Node));
 	element[0].data = arr; element[0].priority = 1; element[0].next=NULL;
 	arr[0]=1;
-	enqueue(start, element);
+	ASSERT(enqueue(start, element));
 	assertIt(expected, 1, start);
 }
 
@@ -56,8 +56,8 @@ void test_to_enqueue_two_elements(){
 	elements1[0].data = arr+1; elements1[0].priority = 1; elements1[0].next=NULL;
 	arr[0]=1;
 	arr[1]=2;
-	enqueue(start, elements0);
-	enqueue(start, elements1);
+	ASSERT(enqueue(start, elements0));
+	ASSERT(enqueue(start, elements1));
 	assertIt(expected,2, start);
 }
 
@@ -72,9 +72,9 @@ void test_to_enqueue_three_elements_with_complex_priority(){
 	arr[0]=1;
 	arr[1]=2;
 	arr[2]=3;
-	enqueue(start, elements0);
-	enqueue(start, elements1);
-	enqueue(start, elements2);
+	ASSERT(enqueue(start, elements0));
+	ASSERT(enqueue(start, elements1));
+	ASSERT(enqueue(start, elements2));
 	assertIt(expected,3,start);
 }
 
@@ -86,7 +86,7 @@ void test_to_dequeue_an_element(){
 	arr[0]=1;
 	enqueue(start, &element);
 	assertIt(expected, 1, start);
-	dequeue(start);
+	ASSERT(&element == dequeue(start));
 	assertIt(NULL, 0, start);
 }
 
@@ -99,10 +99,10 @@ void test_to_dequeue_one_element_from_two_elements(){
 	elements1[0].data = arr+1; elements1[0].priority = 1; elements1[0].next=NULL;
 	arr[0]=1;
 	arr[1]=2;
-	enqueue(start, elements0);
-	enqueue(start, elements1);
+	ASSERT(enqueue(start, elements0));
+	ASSERT(enqueue(start, elements1));
 	assertIt(beforeDequeue, 2, start);
-	dequeue(start);
+	ASSERT(elements1 == dequeue(start));
 	assertIt(afterDequeue, 1, start);	
 }
 void test_to_enqueue_two_elements_at_end(){
@@ -112,8 +112,8 @@ void test_to_enqueue_two_elements_at_end(){
 	elements1[0].data = arr+1; elements1[0].priority = 2; elements1[0].next=NULL;
 	arr[0]=1;
 	arr[1]=2;
-	enqueue(start, elements0);
-	enqueue(start, elements1);
+	ASSERT(enqueue(start, elements0));
+	ASSERT(enqueue(start, elements1));
 	assertIt(expected, 2, start);
 }
 
@@ -126,9 +126,9 @@ void test_to_enqueue_elements_in_between_of_queue(){
 	elements2[0].data = arr+2;elements2[0].priority = 3;elements2[0].next = NULL;
 	elements3[0].data = arr+3;elements3[0].priority = 2;elements3[0].next = NULL;
 	arr[0]=1; arr[1]=2; arr[2]=3;arr[3]=4;arr[4]=5;
-	enqueue(start, elements0);
-	enqueue(start, elements1);
-	enqueue(start, elements2);
-	enqueue(start, elements3);
+	ASSERT(enqueue(start, elements0));
+	ASSERT(enqueue(start, elements1));
+	ASSERT(enqueue(start, elements2));
+	ASSERT(enqueue(start, elements3));
 	assertIt(expected, 4, start);
 }
