@@ -94,6 +94,16 @@ int main(){
 		test_9_insert_element_with_getiterator();
 	tearDown();
 	testEnded();
+	testStarted("test_10_insert_element_at_negative_index");
+	setup();
+		test_10_insert_element_at_negative_index();
+	tearDown();
+	testEnded();
+	testStarted("test_11_to_check_empty_iterator");
+	setup();
+		test_11_to_check_empty_iterator();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

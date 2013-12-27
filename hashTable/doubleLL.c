@@ -38,26 +38,11 @@ int insert(List *start, int index, void *data){
         return 1;
 	}
 	if(index >= 0 && index < start->length){
-		int count;
-		head = start->head;
-		prev = head->previous;
-		next = head;
-		if(index == 0){
-			start->head = createNode(prev, next);
-			start->head->data = data;
-			start->length++;
-			return 1;
-		}
-		for (count = 0; count < index-1; ++count)
-		{
-			head = head->next;
-		}
-		prev = head;
-		next = head->next;
+		next = prev->next;
 		head->next = createNode(prev, next);
-		head->next->data = data;
-		start->length++;
-
+		head->data = data;
+		start->length ++;
+		return 1;
 	}
 	return 1;	
 }
@@ -124,7 +109,7 @@ void* next(Iterator* it){
 	for(count = 0 ; count < it->position ; count++ ){
 		temp = temp->next;
 	}
-	return temp->data;
+	return temp;
 }
 
 

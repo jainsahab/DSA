@@ -3,6 +3,7 @@
 List create(int capacity){
 	List list;
 	list.base = malloc((capacity+1)*sizeof(void *));
+	list.base[0] = NULL;
 	list.capacity = capacity;
 	list.length = 0;
 	return list;
@@ -39,6 +40,8 @@ int add(List* list, void* data){
 }
 
 int insert(List* list, int index, void* data){
+	if(index < 0)
+		return 0;
 	reallocateIfNeeded(list, index);
 	slideElementToRightIfNeed(list, index);
 	list->base[index] = data;

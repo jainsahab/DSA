@@ -64,6 +64,16 @@ int main(){
 		test_3_to_insert_element_at_end_of_linked_list();
 	tearDown();
 	testEnded();
+	testStarted("test_insert_element_at_beginning_after_one_element");
+	setup();
+		test_insert_element_at_beginning_after_one_element();
+	tearDown();
+	testEnded();
+	testStarted("test_insert_element_at_end_of_index_one");
+	setup();
+		test_insert_element_at_end_of_index_one();
+	tearDown();
+	testEnded();
 	testStarted("test_4_to_insert_element_in_between");
 	setup();
 		test_4_to_insert_element_in_between();
@@ -92,6 +102,16 @@ int main(){
 	testStarted("test_9_to_know_whether_the_list_is_empty_or_not");
 	setup();
 		test_9_to_know_whether_the_list_is_empty_or_not();
+	tearDown();
+	testEnded();
+	testStarted("test_10_to_check_iterator");
+	setup();
+		test_10_to_check_iterator();
+	tearDown();
+	testEnded();
+	testStarted("test_11_to_check_empty_iterator");
+	setup();
+		test_11_to_check_empty_iterator();
 	tearDown();
 	testEnded();
 

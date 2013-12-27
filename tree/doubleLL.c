@@ -16,7 +16,7 @@ Node* createNode(void* prevAddress,void* nextAddress){
 	return newNode;
 }
 
-int insert(List *start, int index, void *data){
+int insert(List* start, int index, void *data){
 	Node *head=NULL,*prev=NULL,*next=NULL;
 	int i;
 	head = start->head;
@@ -26,9 +26,9 @@ int insert(List *start, int index, void *data){
     }
     head = prev;
 	if(start->length==0){
-		start->head = createNode(prev, next);;
+		start->head = createNode(prev, next);
 		start->head->data=data;
-		start->length++;	
+		start->length++;
 		return 1;
 	}
 	if(start->length == index){

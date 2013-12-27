@@ -1,0 +1,1 @@
+int hashCodeGenerator(char *key);

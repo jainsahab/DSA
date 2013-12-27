@@ -16,3 +16,5 @@ void* remove(List* start, int index);
 void dispose(List* start);
 int isEmpty(List* start);
 Iterator getIterator(List* list);
+int hasnext(Iterator* it);
+void* next(Iterator* it);

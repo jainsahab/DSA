@@ -15,6 +15,7 @@ sampleData second = {2,"Dubey",80};
 sampleData third = {3,"Manish",90};
 
 const int SUCCESS = 1;
+const int FAILURE = 0;
 List list;
 
 void setup(){
@@ -141,5 +142,17 @@ void test_9_insert_element_with_getiterator(){
 		ASSERT(expected[count] == temp->marks);
 		count++;
 	}
+}
 
+void test_10_insert_element_at_negative_index(){
+	sampleData* actual ;
+	int result = insert(&list, -1, &first);
+	ASSERT(result == FAILURE);
+}
+
+void test_11_to_check_empty_iterator(){
+	sampleData* temp;
+	Iterator it = getIterator(&list);
+	int result = it.hasNext(&it);
+	ASSERT(FAILURE == result);
 }

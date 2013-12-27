@@ -35,6 +35,28 @@ void test_3_to_insert_element_at_end_of_linked_list(){
 	ASSERT(2==start->length);
 }
 
+void test_insert_element_at_beginning_after_one_element(){
+	int data=2,data2 =3;
+	insert(start, 0, &data);
+	insert(start, 0, &data2);
+	ASSERT(3==*(int*)(start->head->data));
+	ASSERT(2==*(int*)(start->head->next->data));
+	ASSERT(NULL == start->head->next->next);
+	ASSERT(2==start->length);
+}
+
+void test_insert_element_at_end_of_index_one(){
+	int data=2,data2 =3,data3=4;
+	insert(start, 0, &data);
+	insert(start, 1, &data2);
+	insert(start, 1, &data3);
+	ASSERT(2==*(int*)(start->head->data));
+	ASSERT(4==*(int*)(start->head->next->data));
+	ASSERT(3 == *(int*)(start->head->next->next->data));
+	ASSERT(NULL == start->head->next->next->next);
+	ASSERT(3==start->length);
+}
+
 void test_4_to_insert_element_in_between(){
 	int data=2,data2=3;
 	ASSERT(insert(start, 0, &data));
@@ -81,3 +103,24 @@ void test_8_to_delete_an_element_which_is_no_longer_exist(){
 void test_9_to_know_whether_the_list_is_empty_or_not(){
 	ASSERT(isEmpty(start));
 }	
+
+void test_10_to_check_iterator(){
+	int* temp;
+	int count=0;
+	int data=2,data2 =3;
+	int expected[] = {2,3};
+	Iterator it = getIterator(start);
+	insert(start, 0, &data);
+	insert(start, 1, &data2);
+	while(it.hasNext(&it)){
+		temp = it.next(&it);
+		ASSERT(expected[count] = *(int*)temp);
+		count++;
+	}
+}
+
+void test_11_to_check_empty_iterator(){
+	Node* temp;
+	Iterator it = getIterator(start);
+	ASSERT(0==it.hasNext(&it));
+}
