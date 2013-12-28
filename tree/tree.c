@@ -37,6 +37,17 @@ TreeNode* Traverse(List *list, void* parentData,int (*compare)(void*,void*)){
 	return NULL;
 }
 
+void DisposeTree(List *list){
+	TreeNode* temp;
+	Iterator it = getIterator(list);
+	while(it.hasNext(&it)){
+		temp = it.next(&it);
+		if(NULL != temp->children->head){
+			DisposeTree(temp->children);
+		}
+		dispose(temp->children);
+	}
+}
 
 int insertNode(Tree* tree, void* parentData, void* data){
 	TreeNode* parent;
@@ -90,11 +101,18 @@ void* getChildrenData(Iterator* it){
 	return node->data;
 }
 
-Iterator getChildData(Tree* tree,  void* data){
+Iterator getChildren(Tree* tree,  void* data){
 	TreeNode* parentNode;
 	Iterator it;
 	parentNode = Traverse((List*)tree->root, data,tree->compare);
 	it = getIterator(parentNode->children);
 	it.next = getChildrenData;
 	return it;
+}
+
+int searchNode(Tree *tree, void *data){
+	TreeNode* treenode = Traverse((List*)tree->root, data, tree->compare);
+	if(treenode == NULL)
+		return 0;
+	return 1;
 }

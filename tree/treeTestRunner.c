@@ -109,13 +109,21 @@ int main(){
 		test_delete_node_should_not_delte_when_node_have_child();
 	tearDown();
 	testEnded();
+	testStarted("test_search_should_search_data");
+	setup();
+		test_search_should_search_data();
+	tearDown();
+	testEnded();
+	testStarted("test_search_should_not_search_data_which_is_not_int_tree");
+	setup();
+		test_search_should_not_search_data_which_is_not_int_tree();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
 	return 0;
 }
-
-void tearDown(){}
 
 void fixtureSetup(){}
 
