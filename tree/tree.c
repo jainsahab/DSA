@@ -72,6 +72,8 @@ int findIndex(Tree* tree,TreeNode* treenode,void* data){
 int deleteNode(Tree* tree, void* data){
 	int indexTodelete;
 	TreeNode* treenode = Traverse((List*)tree->root, data, tree->compare);
+	if(treenode == NULL)
+		return 0;
 	if(treenode->children->head != NULL)
 		return 0;
 	indexTodelete = findIndex(tree,treenode->parent,data);

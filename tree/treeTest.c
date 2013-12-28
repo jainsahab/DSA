@@ -182,21 +182,40 @@ void test_to_delete_node_under_root_node_from_middle_of_three_nodes(){
 	ASSERT(SUCCESS == result);
 }
 
-// void test_to_delete_node_under_root_node_which_does_not_exist(){
-// 	int arr[] = {1,2,3,4,5,6,7,8,9,10};
-// 	int result ;
-// 	int count = 3;
-// 	Iterator it;
-// 	result = insertNode(&tree, NULL, &arr[0]);
-// 	ASSERT(SUCCESS == result);
-// 	insertNode(&tree, &arr[0], &arr[1]);
-// 	insertNode(&tree, &arr[0], &arr[2]);
-// 	insertNode(&tree, &arr[0], &arr[3]);
-// 	it = getChildData(&tree, &arr[0]);
-// 	while(it.hasNext(&it)){
-// 		ASSERT(arr[count] == *(int*)(it.next(&it)));
-// 		count--;
-// 	}
-// 	result = deleteNode(&tree, &arr[7]);
-// 	ASSERT(SUCCESS == result);
-// }
+void test_to_delete_node_under_root_node_which_does_not_exist(){
+	int arr[] = {1,2,3,4,5,6,7,8,9,10};
+	int result ;
+	int count = 3;
+	Iterator it;
+	result = insertNode(&tree, NULL, &arr[0]);
+	ASSERT(SUCCESS == result);
+	insertNode(&tree, &arr[0], &arr[1]);
+	insertNode(&tree, &arr[0], &arr[2]);
+	insertNode(&tree, &arr[0], &arr[3]);
+	it = getChildData(&tree, &arr[0]);
+	while(it.hasNext(&it)){
+		ASSERT(arr[count] == *(int*)(it.next(&it)));
+		count--;
+	}
+	result = deleteNode(&tree, &arr[7]);
+	ASSERT(FAILURE == result);
+}
+
+void test_delete_node_should_not_delte_when_node_have_child(){
+	int arr[] = {1,2,3,4,5,6,7,8,9,10};
+	int result ;
+	int count = 3;
+	Iterator it;
+	result = insertNode(&tree, NULL, &arr[0]);
+	ASSERT(SUCCESS == result);
+	insertNode(&tree, &arr[0], &arr[1]);
+	insertNode(&tree, &arr[1], &arr[2]);
+	insertNode(&tree, &arr[2], &arr[3]);
+	it = getChildData(&tree, &arr[2]);
+	while(it.hasNext(&it)){
+		ASSERT(arr[count] == *(int*)(it.next(&it)));
+		count--;
+	}
+	result = deleteNode(&tree, &arr[2]);
+	ASSERT(FAILURE == result);
+}

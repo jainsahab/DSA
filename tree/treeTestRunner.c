@@ -99,6 +99,16 @@ int main(){
 		test_to_delete_node_under_root_node_from_middle_of_three_nodes();
 	tearDown();
 	testEnded();
+	testStarted("test_to_delete_node_under_root_node_which_does_not_exist");
+	setup();
+		test_to_delete_node_under_root_node_which_does_not_exist();
+	tearDown();
+	testEnded();
+	testStarted("test_delete_node_should_not_delte_when_node_have_child");
+	setup();
+		test_delete_node_should_not_delte_when_node_have_child();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
