@@ -27,7 +27,7 @@ TreeNode* Traverse(List *list, void* parentData,int (*compare)(void*,void*)){
 	Iterator it = getIterator(list);
 	while(it.hasNext(&it)){
 		temp = it.next(&it);
-		if (0 == compare(temp,parentData)){
+		if (1 == compare(temp->data,parentData)){
 			return temp;
 		}
 		if(NULL != temp->children->head){
@@ -44,14 +44,38 @@ int insertNode(Tree* tree, void* parentData, void* data){
 	if(parentData == NULL){
 		treenode = getNode(parentData,data);
 		tree->root = create();
-		insert((List*)tree->root, ((List*)tree->root)->length, treenode);
+		insert((List*)tree->root, 0, treenode);
 		return 1;
 	}
 	parent = Traverse((List*)tree->root,parentData,tree->compare);
 	if(parent == NULL)
 		return 0;
 	treenode = getNode(parent, data);
-	insert(parent->children,((List*)tree->root)->length,treenode);
+	insert(parent->children,0,treenode);
+	return 1;
+
+}
+
+int findIndex(Tree* tree,TreeNode* treenode,void* data){
+	Iterator it = getIterator(treenode->children);
+	int count = 0;
+	void* elements;
+	while(it.hasNext(&it)){
+		elements = ((TreeNode*)it.next(&it))->data;
+		if(tree->compare(elements,data))
+			return count;
+		count++;
+	}
+	return -1;
+}
+
+int deleteNode(Tree* tree, void* data){
+	int indexTodelete;
+	TreeNode* treenode = Traverse((List*)tree->root, data, tree->compare);
+	if(treenode->children->head != NULL)
+		return 0;
+	indexTodelete = findIndex(tree,treenode->parent,data);
+	remove(treenode->parent->children, indexTodelete);
 	return 1;
 }
 
