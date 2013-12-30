@@ -64,6 +64,11 @@ int main(){
 		test_to_get_a_record_from_hashtable_when_there_are_more_elements();
 	tearDown();
 	testEnded();
+	testStarted("test_should_update_value_when_same_key_inserted_again");
+	setup();
+		test_should_update_value_when_same_key_inserted_again();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

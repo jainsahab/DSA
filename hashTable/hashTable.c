@@ -27,24 +27,41 @@ Record* getRecord(void* key, void* value){
 	return record;
 }
 
+Record* checkForExistence(List* currentBucket, HashTable* hashtable,void* key){
+	Iterator it;
+	Record* elem;
+	it = getIterator(currentBucket);
+	while(it.hasNext(&it)){
+		elem = it.next(&it);
+		if(hashtable->cmp(elem->key,key))
+			return elem;
+	}
+	return NULL;
+}
 
 int put(HashTable* hashtable,void* key, void* value){
 	Record *record;
 	int bucketNo;
+	Record* temp;
+	List* currentBucket;
 	record = getRecord(key,value);
 	bucketNo = hashtable->codeGenerator(key,hashtable);
-	insert((List*)(hashtable->buckets.base[bucketNo - 1]), 0, record);
+	currentBucket = (List*)(hashtable->buckets.base[bucketNo]);
+	temp = checkForExistence(currentBucket,hashtable,key);
+	if(temp == NULL)
+		insert(currentBucket, 0, record);
+	else
+		temp->value = value;
 	return 1;
 }
 
 void* getValue(HashTable *hashtable, void *key){
 	Iterator it;
-	int bucketNo,count;
-	Node* temp;
+	int bucketNo;
 	Record* elem;
 	List* currentBucket;
 	bucketNo = hashtable->codeGenerator(key,hashtable);
-	currentBucket = ((List*)(hashtable->buckets.base[bucketNo - 1]));
+	currentBucket = ((List*)(hashtable->buckets.base[bucketNo]));
 	it = getIterator(currentBucket);
 	while(it.hasNext(&it)){
 		elem = it.next(&it);

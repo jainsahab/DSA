@@ -3,7 +3,7 @@
 #include <string.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
-
+typedef char String[256];
 int keyCompare(void* key1, void* key2){
 	return 0 == strcmp((char*)key1 , (char*)key2);
 }
@@ -53,4 +53,20 @@ void test_to_get_a_record_from_hashtable_when_there_are_more_elements(){
 	ASSERT(result == SUCCESS);
 	answer = getValue(&hashtable, key2);
 	ASSERT(0 == strcmp((char*)answer, (char*)value2));
+}
+
+void test_should_update_value_when_same_key_inserted_again(){
+	void* answer;
+	String keys[] = {"Apple","mango"};
+	String values[] = {"Seb","Aam","Ras"};
+	int result = put(&hashtable, &keys[0], &values[0]);
+	ASSERT(result == SUCCESS);
+	result = put(&hashtable,&keys[1],&values[1]);
+	ASSERT(result == SUCCESS);
+	answer = getValue(&hashtable, &keys[1]);
+	ASSERT(0 == strcmp((char*)answer, values[1]));
+	result = put(&hashtable,&keys[1],&values[2]);
+	ASSERT(result == SUCCESS);
+	answer = getValue(&hashtable, &keys[1]);
+	ASSERT(0 == strcmp((char*)answer, values[2]));
 }
