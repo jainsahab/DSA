@@ -13,5 +13,6 @@ typedef struct hash_table{
 
 typedef int (*hashCodeGenerator)(void *key,HashTable* hashtable);
 
-HashTable createHastTable(int size, keyComparator keycmp, hashCodeGenerator hashCodegen);
+HashTable createHashTable(int size, keyComparator keycmp, hashCodeGenerator hashCodegen);
 int put(HashTable* hashtable,void* key, void* value);
+void* getValue(HashTable* hashtable,void* key);

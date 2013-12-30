@@ -49,21 +49,13 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_to_put_a_record_in_hashtable");
-	setup();
-		test_to_put_a_record_in_hashtable();
-	tearDown();
-	testEnded();
-	testStarted("test_to_get_a_record_from_hashtable");
-	setup();
-		test_to_get_a_record_from_hashtable();
-	tearDown();
-	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
 	return 0;
 }
+
+void setup(){}
 
 void tearDown(){}
 
