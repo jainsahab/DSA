@@ -15,4 +15,5 @@ typedef int (*hashCodeGenerator)(void *key,HashTable* hashtable);
 
 HashTable createHashTable(int size, keyComparator keycmp, hashCodeGenerator hashCodegen);
 int put(HashTable* hashtable,void* key, void* value);
+int deleteRecord(HashTable* hashtable,void* key);
 void* getValue(HashTable* hashtable,void* key);

@@ -70,3 +70,21 @@ void* getValue(HashTable *hashtable, void *key){
 	}
 	return NULL;
 }
+
+int deleteRecord(HashTable* hashtable, void* key){
+	Iterator it;
+	int bucketNo,index=0;
+	Record* elem;
+	List* currentBucket;
+	bucketNo = hashtable->codeGenerator(key,hashtable);
+	currentBucket = ((List*)(hashtable->buckets.base[bucketNo]));
+	it = getIterator(currentBucket);
+	while(it.hasNext(&it)){
+		elem = it.next(&it);
+		if(hashtable->cmp(elem->key,key))
+			break;
+		index++;
+	}
+	remove(currentBucket, index);
+	return 1;
+}

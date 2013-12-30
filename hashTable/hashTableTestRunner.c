@@ -69,6 +69,11 @@ int main(){
 		test_should_update_value_when_same_key_inserted_again();
 	tearDown();
 	testEnded();
+	testStarted("test_should_delete_a_record_from_hashtable");
+	setup();
+		test_should_delete_a_record_from_hashtable();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

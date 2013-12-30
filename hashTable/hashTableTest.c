@@ -70,3 +70,16 @@ void test_should_update_value_when_same_key_inserted_again(){
 	answer = getValue(&hashtable, &keys[1]);
 	ASSERT(0 == strcmp((char*)answer, values[2]));
 }
+
+void test_should_delete_a_record_from_hashtable(){
+	void* answer;
+	String keys[] = {"Apple"};
+	String values[] = {"Seb"};
+	int result = put(&hashtable, &keys[0], &values[0]);
+	ASSERT(result == SUCCESS);
+	answer = getValue(&hashtable, &keys[0]);
+	ASSERT(0 == strcmp((char*)answer, values[0]));
+	result = deleteRecord(&hashtable,&keys[0]);
+	answer = getValue(&hashtable, &keys[0]);
+	ASSERT(answer == NULL);
+}
