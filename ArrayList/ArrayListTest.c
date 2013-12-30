@@ -16,19 +16,19 @@ sampleData third = {3,"Manish",90};
 
 const int SUCCESS = 1;
 const int FAILURE = 0;
-List list;
+ArrayList list;
 
 void setup(){
 	int noOfElements = 2;
-	list = create(noOfElements);
+	list = createList(noOfElements);
 }
 
 void tearDown(){
-	dispose(list.base);
+	disposeList(list.base);
 }
 
 void test_1_insert_into_array_list(){
-	int result = insert(&list, 0, &first);
+	int result = insertIntoList(&list, 0, &first);
 	sampleData* actual = (sampleData*)get(&list, 0);
 	ASSERT(SUCCESS == result);
 	ASSERT(actual->rollNo == first.rollNo);
@@ -36,8 +36,8 @@ void test_1_insert_into_array_list(){
 
 void test_2_insert_multiple_element(){
 	sampleData* actual ;
-	insert(&list, 0, &first);
-	insert(&list, 1, &second);
+	insertIntoList(&list, 0, &first);
+	insertIntoList(&list, 1, &second);
 	actual = (sampleData*)get(&list, 0);
 	ASSERT(actual->rollNo == first.rollNo);	
 	actual = (sampleData*)get(&list, 1);
@@ -46,9 +46,9 @@ void test_2_insert_multiple_element(){
 
 void test_3_insert_element_beyond_its_capacity(){
 	sampleData* actual ;
-	insert(&list, 0, &first);
-	insert(&list, 1, &second);
-	insert(&list, 2, &third);
+	insertIntoList(&list, 0, &first);
+	insertIntoList(&list, 1, &second);
+	insertIntoList(&list, 2, &third);
 	actual = (sampleData*)get(&list, 0);
 	ASSERT(actual->rollNo == first.rollNo);	
 	actual = (sampleData*)get(&list, 1);
@@ -58,9 +58,9 @@ void test_3_insert_element_beyond_its_capacity(){
 
 void test_4_insert_element_in_between(){
 	sampleData* actual ;
-	add(&list,  &first);
-	add(&list,  &second);
-	insert(&list, 1, &third);
+	addIntoList(&list,  &first);
+	addIntoList(&list,  &second);
+	insertIntoList(&list, 1, &third);
 	actual = (sampleData*)get(&list, 0);
 	ASSERT(actual->rollNo == first.rollNo);	
 	actual = (sampleData*)get(&list, 1);
@@ -71,10 +71,10 @@ void test_4_insert_element_in_between(){
 
 void test_5_remove_element_from_between(){
 	sampleData* actual ;
-	add(&list,  &first);
-	add(&list,  &second);
-	add(&list, &third);
-	remove(&list, 1);
+	addIntoList(&list,  &first);
+	addIntoList(&list,  &second);
+	addIntoList(&list, &third);
+	removeFromList(&list, 1);
 	actual = (sampleData*)get(&list, 0);
 	ASSERT(actual->rollNo == first.rollNo);	
 	actual = (sampleData*)get(&list, 1);
@@ -85,10 +85,10 @@ void test_5_remove_element_from_between(){
 
 void test_6_remove_element_from_beginning(){
 	sampleData* actual ;
-	add(&list,  &first);
-	add(&list,  &second);
-	add(&list, &third);
-	remove(&list, 0);
+	addIntoList(&list,  &first);
+	addIntoList(&list,  &second);
+	addIntoList(&list, &third);
+	removeFromList(&list, 0);
 	actual = (sampleData*)get(&list, 0);
 	ASSERT(actual->rollNo == second.rollNo);	
 	actual = (sampleData*)get(&list, 1);
@@ -99,10 +99,10 @@ void test_6_remove_element_from_beginning(){
 
 void test_7_remove_element_from_end(){
 	sampleData* actual ;
-	add(&list,  &first);
-	add(&list,  &second);
-	add(&list, &third);
-	remove(&list, 2);
+	addIntoList(&list,  &first);
+	addIntoList(&list,  &second);
+	addIntoList(&list, &third);
+	removeFromList(&list, 2);
 	actual = (sampleData*)get(&list, 0);
 	ASSERT(actual->rollNo == first.rollNo);	
 	actual = (sampleData*)get(&list, 1);
@@ -120,9 +120,9 @@ void test_8_to_search_into_arrayList(){
 	int index ;
 	int expected = 1;
 	char* str = "Dubey";
-	add(&list,  &first);
-	add(&list,  &second);
-	add(&list, &third);
+	addIntoList(&list,  &first);
+	addIntoList(&list,  &second);
+	addIntoList(&list, &third);
 	actual = (sampleData*)get(&list, 2);
 	ASSERT(&third == actual);
 	index = search(&list, comparison, str);
@@ -133,10 +133,10 @@ void test_9_insert_element_with_getiterator(){
 	sampleData* temp;
 	int count =0;
 	int expected[]={79 ,80, 90};
-	Iterator it = getIterator(&list);
-	add(&list,  &first);
-	add(&list,  &second);
-	add(&list, &third);
+	Iterator it = getIteratorOfArrayList(&list);
+	addIntoList(&list,  &first);
+	addIntoList(&list,  &second);
+	addIntoList(&list, &third);
 	while(it.hasNext(&it)){
 		temp = (sampleData*)it.next(&it);
 		ASSERT(expected[count] == temp->marks);
@@ -146,13 +146,13 @@ void test_9_insert_element_with_getiterator(){
 
 void test_10_insert_element_at_negative_index(){
 	sampleData* actual ;
-	int result = insert(&list, -1, &first);
+	int result = insertIntoList(&list, -1, &first);
 	ASSERT(result == FAILURE);
 }
 
 void test_11_to_check_empty_iterator(){
 	sampleData* temp;
-	Iterator it = getIterator(&list);
+	Iterator it = getIteratorOfArrayList(&list);
 	int result = it.hasNext(&it);
 	ASSERT(FAILURE == result);
 }

@@ -1,5 +1,12 @@
 #include "hashTable.h"
+#include <stdlib.h>
 
-int hashCodeGenerator(char *key){
-	return key[0]%10;
+
+HashTable createHashTable(int size, keyComparator keycmp, hashCodeGenerator hashCodegen){
+	HashTable hashtable;
+	hashtable.bucketsSize = size;
+	hashtable.cmp  = keycmp;
+	hashtable.codeGenerator = hashCodegen;
+	hashtable.buckets = createList(size);
+	return hashtable;
 }

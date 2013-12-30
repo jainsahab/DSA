@@ -1,7 +1,7 @@
 #include "ArrayList.h"
 #include <stdlib.h>
-List create(int capacity){
-	List list;
+ArrayList createList(int capacity){
+	ArrayList list;
 	list.base = malloc((capacity+1)*sizeof(void *));
 	list.base[0] = NULL;
 	list.capacity = capacity;
@@ -11,7 +11,7 @@ List create(int capacity){
 
 
 
-void reallocateIfNeeded(List* list, int index){
+void reallocateIfNeeded(ArrayList* list, int index){
 	int targetCapacity;
 	if(list->length >= list->capacity){
 		targetCapacity = 2 * list->capacity;
@@ -20,7 +20,7 @@ void reallocateIfNeeded(List* list, int index){
 	}
 }
 
-void slideElementToRightIfNeed(List* list, int index){
+void slideElementToRightIfNeed(ArrayList* list, int index){
 	int count;
 	if(index < list->length){
 		list->base[list->length+1] = NULL;
@@ -31,7 +31,7 @@ void slideElementToRightIfNeed(List* list, int index){
 	}
 }
 
-int add(List* list, void* data){
+int addIntoList(ArrayList* list, void* data){
 	reallocateIfNeeded(list, list->length);
 	list->base[list->length] = data;
 	list->base[list->length+1] = NULL;
@@ -39,7 +39,7 @@ int add(List* list, void* data){
 	return 1;
 }
 
-int insert(List* list, int index, void* data){
+int insertIntoList(ArrayList* list, int index, void* data){
 	if(index < 0)
 		return 0;
 	reallocateIfNeeded(list, index);
@@ -49,11 +49,11 @@ int insert(List* list, int index, void* data){
 	return 1;
 }
 
-void* get(List *list, int index){	
+void* get(ArrayList *list, int index){	
 	return list->base[index];
 }
 
-int remove(List* list, int index){
+int removeFromList(ArrayList* list, int index){
 	int count;
 	if(index >= list->length)
 		return 0;
@@ -64,7 +64,7 @@ int remove(List* list, int index){
 	return 1;
 }
 
-int search(List *list, compare areEqual, void *elementToBeSearch){
+int search(ArrayList *list, compare areEqual, void *elementToBeSearch){
 	int count;
 	for(count = 0 ; count < list->length ; count ++){
  		if(!areEqual(elementToBeSearch,list->base[count]))
@@ -73,23 +73,23 @@ int search(List *list, compare areEqual, void *elementToBeSearch){
 	return -1;
 }
 
-void dispose(void* ptr){
+void disposeList(void* ptr){
 	free(ptr);
 }
 
 int hasnext (Iterator* it){
-	List* temp = (List*)it->list;
+	ArrayList* temp = (ArrayList*)it->list;
 	if(temp->base[it->position+1] != NULL)
 		return 1;
 	return 0;
 }
 
 void* giveNextElement(Iterator* it){
-	List* temp = (List*)it->list;
+	ArrayList* temp = (ArrayList*)it->list;
 	return temp->base[++it->position];	
 }
 
-Iterator getIterator(List* list){
+Iterator getIteratorOfArrayList(ArrayList* list){
 	Iterator it;
 	it.position = -1;
 	it.list = list;

@@ -1,4 +1,4 @@
-#include "../iterator.h"
+#include "../../iterator.h"
 typedef struct Struct_type{
 	void* data;
 	struct Struct_type *next;
@@ -16,5 +16,3 @@ void* remove(List* start, int index);
 void dispose(List* start);
 int isEmpty(List* start);
 Iterator getIterator(List* list);
-int hasnext(Iterator* it);
-void* next(Iterator* it);

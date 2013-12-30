@@ -1,3 +1,6 @@
+#ifndef _Iterator_
+#define _Iterator_
+
 typedef struct itrt{
 	int position;
 	void* list;
@@ -5,3 +8,5 @@ typedef struct itrt{
 	int (*hasNext)(struct itrt* itr);
 
 } Iterator;
+
+#endif
