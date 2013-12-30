@@ -20,33 +20,36 @@ HashTable createHashTable(int size, keyComparator keycmp, hashCodeGenerator hash
 	return hashtable;
 }
 
-Record getRecord(void* key, void* value){
-	Record record;
-	record.key = key;
-	record.value = value;
+Record* getRecord(void* key, void* value){
+	Record* record = malloc(sizeof(Record));
+	record->key = key;
+	record->value = value;
 	return record;
 }
 
 
 int put(HashTable* hashtable,void* key, void* value){
-	Record record;
+	Record *record;
 	int bucketNo;
 	record = getRecord(key,value);
 	bucketNo = hashtable->codeGenerator(key,hashtable);
-	insert((List*)(hashtable->buckets.base[bucketNo - 1]), 0, &record);
+	insert((List*)(hashtable->buckets.base[bucketNo - 1]), 0, record);
 	return 1;
 }
 
 void* getValue(HashTable *hashtable, void *key){
 	Iterator it;
-	int bucketNo;
-	Record* temp;
+	int bucketNo,count;
+	Node* temp;
+	Record* elem;
+	List* currentBucket;
 	bucketNo = hashtable->codeGenerator(key,hashtable);
-	it = getIterator(((List*)(hashtable->buckets.base[bucketNo - 1])));
+	currentBucket = ((List*)(hashtable->buckets.base[bucketNo - 1]));
+	it = getIterator(currentBucket);
 	while(it.hasNext(&it)){
-		temp = it.next(&it);
-		if(hashtable->cmp(temp->key,key))
-			return temp->value;
+		elem = it.next(&it);
+		if(hashtable->cmp(elem->key,key))
+			return elem->value;
 	}
 	return NULL;
 }

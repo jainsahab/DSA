@@ -59,6 +59,11 @@ int main(){
 		test_to_get_a_record_from_hashtable();
 	tearDown();
 	testEnded();
+	testStarted("test_to_get_a_record_from_hashtable_when_there_are_more_elements");
+	setup();
+		test_to_get_a_record_from_hashtable_when_there_are_more_elements();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
