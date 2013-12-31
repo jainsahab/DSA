@@ -9,6 +9,7 @@ typedef struct hash_table{
 	int bucketsSize;
 	keyComparator cmp;
 	int (*codeGenerator)(void *key,struct hash_table* hashtable);
+	void* allKeys;
 }HashTable;
 
 typedef int (*hashCodeGenerator)(void *key,HashTable* hashtable);
@@ -17,3 +18,4 @@ HashTable createHashTable(int size, keyComparator keycmp, hashCodeGenerator hash
 int put(HashTable* hashtable,void* key, void* value);
 int deleteRecord(HashTable* hashtable,void* key);
 void* getValue(HashTable* hashtable,void* key);
+Iterator getAllKeys(HashTable* hashtable);

@@ -83,3 +83,22 @@ void test_should_delete_a_record_from_hashtable(){
 	answer = getValue(&hashtable, &keys[0]);
 	ASSERT(answer == NULL);
 }
+
+
+
+void test_should_return_all_the_keys_from_hashTable(){
+	void* answer;
+	Iterator it;
+	int index = 1;
+	String keys[] = {"Apple","mango"};
+	String values[] = {"Seb","Aam"};
+	int result = put(&hashtable, &keys[0], &values[0]);
+	ASSERT(result == SUCCESS);
+	result = put(&hashtable, &keys[1], &values[1]);
+	ASSERT(result == SUCCESS);
+	it = getAllKeys(&hashtable);
+	while(it.hasNext(&it)){
+		ASSERT(0 == strcmp(keys[index],(char*)it.next(&it)));
+		index--;
+	}
+}

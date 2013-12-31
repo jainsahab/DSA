@@ -74,6 +74,11 @@ int main(){
 		test_should_delete_a_record_from_hashtable();
 	tearDown();
 	testEnded();
+	testStarted("test_should_return_all_the_keys_from_hashTable");
+	setup();
+		test_should_return_all_the_keys_from_hashTable();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

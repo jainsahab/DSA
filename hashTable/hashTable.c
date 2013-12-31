@@ -14,6 +14,7 @@ HashTable createHashTable(int size, keyComparator keycmp, hashCodeGenerator hash
 	hashtable.cmp  = keycmp;
 	hashtable.codeGenerator = hashCodegen;
 	hashtable.buckets = createList(size);
+	hashtable.allKeys = create();
 	for(count = 0 ; count < size ; count++){
 		hashtable.buckets.base[count] = create();
 	}
@@ -52,6 +53,7 @@ int put(HashTable* hashtable,void* key, void* value){
 		insert(currentBucket, 0, record);
 	else
 		temp->value = value;
+	insert((List*)hashtable->allKeys, 0, record);
 	return 1;
 }
 
@@ -87,4 +89,19 @@ int deleteRecord(HashTable* hashtable, void* key){
 	}
 	remove(currentBucket, index);
 	return 1;
+}
+
+void* returnKeys(Iterator* it){
+	Record* record;
+	Iterator first = getIterator(it->list);
+	first.position = it->position;
+	record = first.next(&first);
+	it->position++;
+	return record->key;
+}
+
+Iterator getAllKeys(HashTable* hashtable){
+	Iterator it = getIterator((List*)hashtable->allKeys);
+	it.next = returnKeys;
+	return it;
 }
