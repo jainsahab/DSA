@@ -49,11 +49,12 @@ int put(HashTable* hashtable,void* key, void* value){
 	bucketNo = hashtable->codeGenerator(key,hashtable);
 	currentBucket = (List*)(hashtable->buckets.base[bucketNo]);
 	temp = checkForExistence(currentBucket,hashtable,key);
-	if(temp == NULL)
+	if(temp == NULL){
 		insert(currentBucket, 0, record);
+		insert((List*)hashtable->allKeys, 0, record);
+	}
 	else
 		temp->value = value;
-	insert((List*)hashtable->allKeys, 0, record);
 	return 1;
 }
 

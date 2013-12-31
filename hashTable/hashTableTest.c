@@ -102,3 +102,21 @@ void test_should_return_all_the_keys_from_hashTable(){
 		index--;
 	}
 }
+
+void test_should_return_a_key_once_when_it_is_inserted_two_times(){
+	void* answer;
+	Iterator it;
+	String keys[] = {"Apple","mango"};
+	String values[] = {"Seb","Aam","Ras"};
+	put(&hashtable, &keys[0], &values[0]);
+	put(&hashtable, &keys[1], &values[1]);
+	put(&hashtable, &keys[1], &values[2]);
+	it = getAllKeys(&hashtable);
+	ASSERT(0 == strcmp(keys[1], (char*)it.next(&it)));
+	ASSERT(0 == strcmp(keys[0], (char*)it.next(&it)));
+	ASSERT(0 == it.hasNext(&it));
+	answer = getValue(&hashtable, &keys[0]);
+	ASSERT(0 == strcmp(values[0], (char*)answer));
+	answer = getValue(&hashtable, &keys[1]);
+	ASSERT(0 == strcmp(values[2], (char*)answer));
+}

@@ -79,6 +79,11 @@ int main(){
 		test_should_return_all_the_keys_from_hashTable();
 	tearDown();
 	testEnded();
+	testStarted("test_should_return_a_key_once_when_it_is_inserted_two_times");
+	setup();
+		test_should_return_a_key_once_when_it_is_inserted_two_times();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
