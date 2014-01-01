@@ -125,20 +125,6 @@ void initializeAllListsAgain(ArrayList* buckets, int length){
 	}
 } 
 
-
-int putAgain(HashTable* hashtable,void* key, void* value){
-	Record *record;
-	int bucketNo;
-	Record* temp;
-	List* currentBucket;
-	record = getRecord(key,value);
-	bucketNo = hashtable->codeGenerator(key,hashtable);
-	currentBucket = (List*)(hashtable->buckets.base[bucketNo]);
-	insert(currentBucket, 0, record);
-	return 1;
-}
-
-
 int rehashing(HashTable* hashtable, void* record){
 	Record* temp;
 	Iterator it;
@@ -151,8 +137,8 @@ int rehashing(HashTable* hashtable, void* record){
 	it = getIterator(list);
 	while(it.hasNext(&it)){
 		temp = it.next(&it);
-		putAgain(hashtable, temp->key, temp->value);
+		put(hashtable, temp->key, temp->value);
 	}
-	putAgain(hashtable, ((Record*)record)->key, ((Record*)record)->value);
+	put(hashtable, ((Record*)record)->key, ((Record*)record)->value);
 	return 1;
 }
