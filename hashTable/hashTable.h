@@ -18,4 +18,5 @@ HashTable createHashTable(int size, keyComparator keycmp, hashCodeGenerator hash
 int put(HashTable* hashtable,void* key, void* value);
 int deleteRecord(HashTable* hashtable,void* key);
 void* getValue(HashTable* hashtable,void* key);
+int rehashing(HashTable* hashtable, void* record);
 Iterator getAllKeys(HashTable* hashtable);

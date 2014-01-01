@@ -87,18 +87,14 @@ void* remove(List *start, int index){
 }
 
 void dispose(List* start){
-	Node* temp = start->head;
-	Node* t1 = temp ;
-	int count = 0;
-	while(t1 != NULL){
-		if(count != 0)
-			temp = t1;
-		t1 = temp->next;
-		if (temp != NULL)
-			free(temp);
-		count++;
-	}
-}
+	Node* p ;
+	Node* q;
+	for (p = start->head; p != NULL; p = q) {
+	    q = p->next;
+	    free(p);
+  	}
+  	free(start);
+} 
 
 int isEmpty(List* start){
 	if(start->head == NULL)

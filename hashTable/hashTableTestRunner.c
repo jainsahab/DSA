@@ -84,11 +84,18 @@ int main(){
 		test_should_return_a_key_once_when_it_is_inserted_two_times();
 	tearDown();
 	testEnded();
+	testStarted("test_to_rehashing");
+	setup();
+		test_to_rehashing();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
 	return 0;
 }
+
+void setup(){}
 
 void tearDown(){}
 

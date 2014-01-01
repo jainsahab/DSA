@@ -48,6 +48,8 @@ int put(HashTable* hashtable,void* key, void* value){
 	record = getRecord(key,value);
 	bucketNo = hashtable->codeGenerator(key,hashtable);
 	currentBucket = (List*)(hashtable->buckets.base[bucketNo]);
+	if(currentBucket->length >= 2)
+		return rehashing(hashtable, record);
 	temp = checkForExistence(currentBucket,hashtable,key);
 	if(temp == NULL){
 		insert(currentBucket, 0, record);
@@ -105,4 +107,52 @@ Iterator getAllKeys(HashTable* hashtable){
 	Iterator it = getIterator((List*)hashtable->allKeys);
 	it.next = returnKeys;
 	return it;
+}
+
+void disposeAllLists(ArrayList* arrList){
+	Iterator it = getIteratorOfArrayList(arrList);
+	List* temp;
+	while(it.hasNext(&it)){
+		temp = (List*)(it.next(&it));
+		dispose(temp);
+	}
+}
+
+void initializeAllListsAgain(ArrayList* buckets, int length){
+	int count;
+	for(count = 0 ; count < length ; count++){
+		buckets->base[count] = create();
+	}
+} 
+
+
+int putAgain(HashTable* hashtable,void* key, void* value){
+	Record *record;
+	int bucketNo;
+	Record* temp;
+	List* currentBucket;
+	record = getRecord(key,value);
+	bucketNo = hashtable->codeGenerator(key,hashtable);
+	currentBucket = (List*)(hashtable->buckets.base[bucketNo]);
+	insert(currentBucket, 0, record);
+	return 1;
+}
+
+
+int rehashing(HashTable* hashtable, void* record){
+	Record* temp;
+	Iterator it;
+	int count;	
+	List *list = hashtable->allKeys;
+	disposeAllLists(&hashtable->buckets);
+	hashtable->bucketsSize *= 2;
+	hashtable->buckets.base = realloc(hashtable->buckets.base, hashtable->bucketsSize * sizeof(void*));
+	initializeAllListsAgain(&hashtable->buckets, hashtable->bucketsSize);
+	it = getIterator(list);
+	while(it.hasNext(&it)){
+		temp = it.next(&it);
+		putAgain(hashtable, temp->key, temp->value);
+	}
+	putAgain(hashtable, ((Record*)record)->key, ((Record*)record)->value);
+	return 1;
 }
