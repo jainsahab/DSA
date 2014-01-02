@@ -51,6 +51,7 @@ int insert(Tree* tree, void* data){
 		parentNode->left = treenode;
 	else
 		parentNode->right = treenode;
+	treenode->parent = parentNode;
 	parentNode = treenode;
 	return 1;
 }
