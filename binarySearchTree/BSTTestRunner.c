@@ -64,6 +64,11 @@ int main(){
 		test_should_put_data_on_the_right_side_of_root_Tree();
 	tearDown();
 	testEnded();
+	testStarted("test_should_not_put_data_as_it_is_previously_present");
+	setup();
+		test_should_not_put_data_as_it_is_previously_present();
+	tearDown();
+	testEnded();
 	testStarted("test_should_make_a_left_sub_tree");
 	setup();
 		test_should_make_a_left_sub_tree();
@@ -107,6 +112,16 @@ int main(){
 	testStarted("test_to_delete_a_node_with_one_child_on_its_right_from_right_sub_tree_of_root");
 	setup();
 		test_to_delete_a_node_with_one_child_on_its_right_from_right_sub_tree_of_root();
+	tearDown();
+	testEnded();
+	testStarted("test_to_delete_a_node_with_two_child");
+	setup();
+		test_to_delete_a_node_with_two_child();
+	tearDown();
+	testEnded();
+	testStarted("test_to_delete_a_node_with_two_child_with_a_bit_complex_tree");
+	setup();
+		test_to_delete_a_node_with_two_child_with_a_bit_complex_tree();
 	tearDown();
 	testEnded();
 

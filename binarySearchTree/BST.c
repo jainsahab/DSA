@@ -49,8 +49,10 @@ int insert(Tree* tree, void* data){
 	result = tree->cmp(parentNode->data,data);
 	if(result > 0)
 		parentNode->left = treenode;
-	else
+	else if(result < 0)
 		parentNode->right = treenode;
+	else
+		return 0;
 	treenode->parent = parentNode;
 	parentNode = treenode;
 	return 1;
@@ -100,6 +102,21 @@ int deleteWithOneChild(TreeNode* treenode,void* data, compare cmp){
 	return 1;
 }
 
+void* getSuccessor(TreeNode* treenode){
+	TreeNode* temp = treenode->right;
+	while(temp->right != NULL){
+		temp = temp->right;
+	}
+	return ((TreeNode*)(((TreeNode*)(temp->parent))->left))->data;
+}
+
+int deleteWithTwoChildren(Tree* tree, TreeNode* treenode,void* data){
+	void* successor;
+	successor = getSuccessor(treenode);
+	remove(tree, successor);
+	treenode->data = successor;
+	return 1;
+}
 
 int remove(Tree* tree, void* data){
 	TreeNode* node;
@@ -108,6 +125,8 @@ int remove(Tree* tree, void* data){
 		deleteWithoutChildren(node,data,tree->cmp);
 	else if(node->left == NULL || node->right == NULL)
 		deleteWithOneChild(node,data,tree->cmp);
+	else
+		deleteWithTwoChildren(tree,node,data);
 		
 	return 1;
 }
