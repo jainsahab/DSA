@@ -55,3 +55,11 @@ int insert(Tree* tree, void* data){
 	return 1;
 }
 
+Children* getChildren(Tree* tree,void* data,compare cmp){
+	TreeNode* parentNode;
+	Children* temp;
+	parentNode = traverse(tree->root, data, cmp);
+	temp->left = (parentNode->left == NULL) ? parentNode->left : ((TreeNode*)parentNode->left)->data;
+	temp->right = (parentNode->right == NULL) ? parentNode->right : ((TreeNode*)parentNode->right)->data;
+	return temp;
+}

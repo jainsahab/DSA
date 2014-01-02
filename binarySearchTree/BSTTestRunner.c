@@ -64,6 +64,16 @@ int main(){
 		test_should_put_data_on_the_left_sidsdfe_of_root_Tree();
 	tearDown();
 	testEnded();
+	testStarted("test_to_get_the_children_of_a_node");
+	setup();
+		test_to_get_the_children_of_a_node();
+	tearDown();
+	testEnded();
+	testStarted("test_to_get_the_children_of_a_leaf_node");
+	setup();
+		test_to_get_the_children_of_a_leaf_node();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
