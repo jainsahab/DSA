@@ -130,3 +130,20 @@ int remove(Tree* tree, void* data){
 		
 	return 1;
 }
+
+void freeMemory(TreeNode* node){
+	if(node != NULL){
+		if(node->left == NULL && node->right == NULL){
+			free(node);
+			return;
+		}
+		freeMemory(node->left);
+		freeMemory(node->right);
+	}
+}
+
+void dispose(Tree *tree){
+	if(!tree)
+		return;
+	freeMemory(tree->root);
+}

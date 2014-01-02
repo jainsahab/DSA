@@ -8,12 +8,17 @@ int compareInt(void* prev, void* next){
 	return *(int*)prev - *(int*)next;
 }
 
+
 int SUCCESS = 1;
 int FAILURE = 0;
 
 Tree tree;
 void setup(){
 	tree = create(compareInt);
+}
+
+void tearDown(){
+	dispose(&tree);
 }
 
 void test_should_put_data_as_root_into_Tree(){
