@@ -13,4 +13,4 @@ typedef struct {
 Tree create(compare cmp);
 int insert(Tree* tree, void* data);
 int remove(Tree* tree, void* data);
-Children* getChildren(Tree* tree,void* data,compare cmp);
+Children getChildren(Tree* tree,void* data,compare cmp);

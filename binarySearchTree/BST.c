@@ -56,11 +56,37 @@ int insert(Tree* tree, void* data){
 	return 1;
 }
 
-Children* getChildren(Tree* tree,void* data,compare cmp){
+Children getChildren(Tree* tree,void* data,compare cmp){
 	TreeNode* parentNode;
-	Children* temp;
+	Children temp ;
 	parentNode = traverse(tree->root, data, cmp);
-	temp->left = (parentNode->left == NULL) ? parentNode->left : ((TreeNode*)parentNode->left)->data;
-	temp->right = (parentNode->right == NULL) ? parentNode->right : ((TreeNode*)parentNode->right)->data;
+	temp.left = (parentNode->left == NULL) 
+					? parentNode->left
+					: ((TreeNode*)parentNode->left)->data;
+	temp.right = (parentNode->right == NULL) 
+					? parentNode->right 
+					: ((TreeNode*)parentNode->right)->data;
 	return temp;
+}
+
+int deleteWithoutChildren(TreeNode* treenode,void* data,compare cmp){
+	int result;
+	void* parentData = ((TreeNode*)(treenode->parent))->data;
+	TreeNode* temp;
+	temp = treenode;
+	result = cmp(parentData,data);
+	if(result > 0)
+		((TreeNode*)(treenode->parent))->left = NULL;
+	else
+		((TreeNode*)(treenode->parent))->right = NULL;
+	free(temp);
+	return 1;
+}
+
+int remove(Tree* tree, void* data){
+	TreeNode* node;
+	node = traverse(tree->root, data, tree->cmp);
+	if(node->left == NULL && node->right == NULL)
+		deleteWithoutChildren(node,data,tree->cmp);
+	return 1;
 }
