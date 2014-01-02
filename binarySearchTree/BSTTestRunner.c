@@ -89,6 +89,26 @@ int main(){
 		test_to_delete_a_leaf_node();
 	tearDown();
 	testEnded();
+	testStarted("test_to_delete_a_node_with_one_child_on_its_left");
+	setup();
+		test_to_delete_a_node_with_one_child_on_its_left();
+	tearDown();
+	testEnded();
+	testStarted("test_to_delete_a_node_with_one_child_on_its_right");
+	setup();
+		test_to_delete_a_node_with_one_child_on_its_right();
+	tearDown();
+	testEnded();
+	testStarted("test_to_delete_a_node_with_one_child_on_its_left_from_right_sub_tree_of_root");
+	setup();
+		test_to_delete_a_node_with_one_child_on_its_left_from_right_sub_tree_of_root();
+	tearDown();
+	testEnded();
+	testStarted("test_to_delete_a_node_with_one_child_on_its_right_from_right_sub_tree_of_root");
+	setup();
+		test_to_delete_a_node_with_one_child_on_its_right_from_right_sub_tree_of_root();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

@@ -126,3 +126,55 @@ void test_to_delete_a_leaf_node(){
 	ASSERT(children.left == NULL);
 	ASSERT(children.right == NULL);
 }
+
+void test_to_delete_a_node_with_one_child_on_its_left(){
+	int result;
+	Children children;
+	int arr[] = {1,2,3,4,5,6,7,8,9};
+	insert(&tree,&arr[4]);	
+	insert(&tree, &arr[2]);
+	insert(&tree, &arr[1]);
+	remove(&tree, &arr[2]);
+	children = getChildren(&tree,&arr[4],compareInt);
+	ASSERT(children.left == &arr[1]);
+	ASSERT(children.right == NULL);
+}
+
+void test_to_delete_a_node_with_one_child_on_its_right(){
+	int result;
+	Children children;
+	int arr[] = {1,2,3,4,5,6,7,8,9};
+	insert(&tree, &arr[4]);	
+	insert(&tree, &arr[2]);
+	insert(&tree, &arr[3]);
+	remove(&tree, &arr[2]);
+	children = getChildren(&tree,&arr[4],compareInt);
+	ASSERT(children.left == &arr[3]);
+	ASSERT(children.right == NULL);
+}
+
+void test_to_delete_a_node_with_one_child_on_its_left_from_right_sub_tree_of_root(){
+	int result;
+	Children children;
+	int arr[] = {1,2,3,4,5,6,7,8,9};
+	insert(&tree, &arr[4]);	
+	insert(&tree, &arr[6]);
+	insert(&tree, &arr[5]);
+	remove(&tree, &arr[6]);
+	children = getChildren(&tree,&arr[4],compareInt);
+	ASSERT(children.left == NULL);
+	ASSERT(children.right == &arr[5]);
+}
+
+void test_to_delete_a_node_with_one_child_on_its_right_from_right_sub_tree_of_root(){
+	int result;
+	Children children;
+	int arr[] = {1,2,3,4,5,6,7,8,9};
+	insert(&tree, &arr[4]);	
+	insert(&tree, &arr[6]);
+	insert(&tree, &arr[7]);
+	remove(&tree, &arr[6]);
+	children = getChildren(&tree,&arr[4],compareInt);
+	ASSERT(children.left == NULL);
+	ASSERT(children.right == &arr[7]);
+}

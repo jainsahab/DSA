@@ -83,10 +83,31 @@ int deleteWithoutChildren(TreeNode* treenode,void* data,compare cmp){
 	return 1;
 }
 
+int deleteWithOneChild(TreeNode* treenode,void* data, compare cmp){
+	int result;
+	TreeNode* children;
+	void* parentData = ((TreeNode*)(treenode->parent))->data;
+	if(treenode->right != NULL)
+		children = treenode->right;
+	if(treenode->left != NULL)
+		children = treenode->left;
+	result = cmp(parentData,data);
+	if(result > 0)
+		((TreeNode*)(treenode->parent))->left = children;
+	else
+		((TreeNode*)(treenode->parent))->right = children;
+	free(treenode);
+	return 1;
+}
+
+
 int remove(Tree* tree, void* data){
 	TreeNode* node;
 	node = traverse(tree->root, data, tree->cmp);
 	if(node->left == NULL && node->right == NULL)
 		deleteWithoutChildren(node,data,tree->cmp);
+	else if(node->left == NULL || node->right == NULL)
+		deleteWithOneChild(node,data,tree->cmp);
+		
 	return 1;
 }
