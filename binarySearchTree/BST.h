@@ -5,4 +5,11 @@ typedef struct{
 	compare cmp;
 } Tree;
 
+typedef struct {
+	void* left;
+	void* right;
+} Children;
+
 Tree create(compare cmp);
+int insert(Tree* tree, void* data);
+Children* getChildren(Tree* tree,void* data,compare cmp);
